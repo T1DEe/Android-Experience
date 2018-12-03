@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/textSize22"
+        android:title="@string/textSize22"
+        />
+
+    <item
+        android:id="@+id/textSize27"
+        android:title="@string/textSize27"
+        />
+
+    <item
+        android:id="@+id/textSize32"
+        android:title="@string/textSize32"
+        />
+
+</menu>

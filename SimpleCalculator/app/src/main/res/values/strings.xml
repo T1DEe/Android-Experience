@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Simple Calculator</string>
+    <string name="operationPlus">+</string>
+    <string name="operationMinus">-</string>
+    <string name="operationMultiply">*</string>
+    <string name="operationDivision">/</string>
+</resources>
