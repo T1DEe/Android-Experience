@@ -18,7 +18,7 @@ public class MainActivity extends Activity {
         ViewGroup.LayoutParams linLayoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
                                         // создаем параметры layout'a
 
-        setContentView(linearLayout, linLayoutParams);  // обединянем параметры с layout'ом
+        setContentView(linearLayout, linLayoutParams);  // объединянем параметры с layout'ом
 
         ViewGroup.LayoutParams layparParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         TextView tv = new TextView(this);
