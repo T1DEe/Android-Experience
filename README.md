@@ -1,2 +1,2 @@
 # AndroidExperience
-Some small projects and test applications on android.
+Some small android projects and test applications.
