@@ -15,7 +15,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
     Button btnAdd;
     Button btnRead;
     Button btnClear;
+    Button btnDeleteById;
+    Button btnUpdateById;
+    Button btnDeleteByName;
+    Button btnUpdateByName;
 
+    EditText etId;
     EditText etName;
     EditText etEmail;
 
@@ -26,6 +31,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        etId = findViewById(R.id.idField);
         etName = findViewById(R.id.nameField);
         etEmail = findViewById(R.id.emailField);
 
@@ -38,20 +44,37 @@ public class MainActivity extends Activity implements View.OnClickListener {
         btnClear = findViewById(R.id.btnClear);
         btnClear.setOnClickListener(this);
 
+        btnDeleteById = findViewById(R.id.btnDeleteById);
+        btnDeleteById.setOnClickListener(this);
+
+        btnUpdateById = findViewById(R.id.btnUpdateById);
+        btnUpdateById.setOnClickListener(this);
+
+        btnDeleteByName = findViewById(R.id.btnDeleteByName);
+        btnDeleteByName.setOnClickListener(this);
+
+        btnUpdateByName = findViewById(R.id.btnUpdateByName);
+        btnUpdateByName.setOnClickListener(this);
+
         dbHelper = new DBHelper(this);
     }
 
     @Override
     public void onClick(View v) {
-        String name = etName.getText().toString();
-        String email = etEmail.getText().toString();
+        String id = etId.getText().toString();
+        String name = etName.getText().toString();;
+        String email = etEmail.getText().toString();;
 
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
         switch (v.getId())
         {
+            //–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
             case R.id.btnAdd:
+                if(name.equals("") || email.equals(""))
+                    break;
+
                 contentValues.put(DBHelper.KEY_NAME, name);
                 contentValues.put(DBHelper.KEY_EMAIL, email);
 
@@ -59,6 +82,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 Log.d("dbLog", "added row: " + "NAME = " + name + ", " +
                         "E-MAIL = " + email);
                 break;
+            //–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
             case R.id.btnRead:
                 Cursor cursor = database.query(DBHelper.TABLE_CONTACTS, null, null, null, null, null, null);
 
@@ -79,9 +103,49 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
                 cursor.close();
                 break;
+            //–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
             case R.id.btnClear:
                 database.delete(DBHelper.TABLE_CONTACTS, null, null);
                 break;
+            //–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+            case R.id.btnDeleteById:
+                if(id.equals(""))
+                    break;
+
+                int delCountById = database.delete(DBHelper.TABLE_CONTACTS, DBHelper.KEY_ID + " = " + id, null);
+                Log.d("dbLog", delCountById + " rows was delete");
+                break;
+            //–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+            case R.id.btnUpdateById:
+                if(id.equals(""))
+                    break;
+
+                contentValues.put(DBHelper.KEY_NAME, name);
+                contentValues.put(DBHelper.KEY_EMAIL, email);
+
+                int updCountById = database.update(DBHelper.TABLE_CONTACTS, contentValues, DBHelper.KEY_ID + " = ?", new String[] {id});
+                Log.d("dbLog", updCountById + " rows was update");
+                break;
+            //–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+            case R.id.btnDeleteByName:
+                if(name.equals(""))
+                    break;
+
+                int delCountByName = database.delete(DBHelper.TABLE_CONTACTS, DBHelper.KEY_NAME + " = ?", new String[] {name} );
+                Log.d("dbLog", delCountByName + " rows was delete");
+                break;
+            //–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+            case R.id.btnUpdateByName:
+                if(name.equals(""))
+                    break;
+
+                contentValues.put(DBHelper.KEY_NAME, name);
+                contentValues.put(DBHelper.KEY_EMAIL, email);
+
+                int updCountByName = database.update(DBHelper.TABLE_CONTACTS, contentValues, DBHelper.KEY_NAME + " = ?", new String[] {name});
+                Log.d("dbLog", updCountByName + " rows was update");
+                break;
+            //–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
         }
         dbHelper.close();
     }
