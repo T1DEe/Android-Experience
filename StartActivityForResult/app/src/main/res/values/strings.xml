@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">StartActivityForResult</string>
+    <string name="appeal">Please, input your name</string>
+    <string name="btnInput">To Input</string>
+</resources>

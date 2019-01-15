@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ImplicitlyIntents2</string>
+    <string name="time">Time</string>
+    <string name="date">Date</string>
+    <string name="text">text</string>
+    <string name="textView">TextView</string>
+    <string name="hintText">Input your text here!</string>
+</resources>
