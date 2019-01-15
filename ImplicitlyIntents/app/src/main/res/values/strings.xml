@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">Implicitly Intents</string>
-    <string name="activity_time">ACTIVITY TIME</string>
-    <string name="activity_date">ACTIVITY DATE</string>
-    <string name="time">Time</string>
-    <string name="date">Date</string>
-</resources>
